@@ -1,3 +1,3 @@
 axios
   .get("https://jsonplaceholder.typicode.com/users/3")
-  .then(({data}) => console.log(data.email, '\n\n\n'));    
+  .then(({data}) => console.log(data.email, '\n\n\n'));

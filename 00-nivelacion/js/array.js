@@ -8,3 +8,4 @@ number.map( (number) => {
 })
 document.write("</ul>")
 document.write("<h3>"+names[1]+"</h3>");
+document.write("Comentario");
