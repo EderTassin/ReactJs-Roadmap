@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>Document</title>
+
+    <style>
+        picture {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            width: 100px;
+        }
+
+        picture.is-small{
+            width: 50px;
+        }
+
+        picture.is-large{
+            width: 200px;
+        }
+
+        img {
+            box-shadow: 0 0 15px #999;
+            width: 100%;
+            border-radius: 50%;
+        }
+
+        img.disable{
+            opacity: 0.5;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Avatar test</h1>
+    <div id="app"></div>
+
+
+    <script type="text/babel">
+        const $app = document.getElementById('app');
+        const useState = React.useState;
+        //const h = React.createElement;
+
+        const Avatar =  ({id, name = 'name', size}) => {
+            const src = `https://randomuser.me/api/portraits/women/${id}.jpg`;
+            const [enabled, setEnable] = useState(true);
+            const imgClassName = enabled ? "" : "disable";
+            
+            let pictureClassName = ''; 
+            if (size == "small"){
+               pictureClassName = 'is-small';
+            }else if (size == "large"){
+                pictureClassName = 'is-large';
+            }
+
+            return (
+                <picture className={pictureClassName}>
+                    {id ? (
+                        <img src={src} 
+                        className={imgClassName}
+                        onClick={() => setEnable(!enabled)}
+                        />
+                    ) : (
+                        <strong>Sin image</strong>
+                    )}
+                    
+                    <h3>{enabled ? name : "Desactivado"}</h3>
+                    <br/>
+                </picture>
+            );
+            // Con JSX podemos trasnformar el html a React.createElement
+        };
+
+        function Count(){
+            const [count, setCount] = useState(55);
+
+            return (
+                <React.Fragment>
+                    <span>{count}</span>
+                    <br/>
+
+                    <button onClick={() =>{
+                        setCount(count + 1);
+                    }}>Increment +</button>
+
+                    <button onClick={() =>{
+                        setCount(count - 1);
+                    }}>Decrement -</button>
+
+                </React.Fragment>    
+            );
+        }
+
+        ReactDOM.render(
+            <div>
+                <Avatar id="1" name="Name" size="small"/>
+                <Avatar id="2" name="Name2" size="large"/>
+                <Avatar id="3" name="Name3"/>
+                <Avatar size="small"/>
+                <Count/>
+            </div>,
+            $app
+        );
+    </script>
+
+</body>
+<script>console.log("H")</script>
+</html>
