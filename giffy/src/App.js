@@ -1,27 +1,28 @@
 import './App.css';
-import React, { useState } from 'react';
+import React from 'react';
 import ListOfGifs from './components/ListOfGifs';
+import { Link, Route } from 'wouter';
+
 
 function App() {
-
-  const [keyword, setKeyboard] = useState([]);
-
-  function setGifsKeyword() {
-   keyword = document.getElementById("keywordGif").value;
-  }
 
   return (
     <div className="App">
       <section className="App-content">
         <h1>Giphy</h1>
 
-        <input type="text" name="keywordGif" id="keywordGif" value='rick'/>
-        <button onClick={setGifsKeyword()}>Search</button>
+
+        
+        <Link to="/">Home</Link>
+        <Link to="/gif/autos">Gifs de Autos</Link>
+        <Link to="/gif/programming">Gifs de Programing</Link>
+
 
         <div>
-          <ListOfGifs keyword={keyword ? keyword :'rick'} />
+          <Route
+            component={ListOfGifs} path="/gif/:keyword"
+          />
         </div>
-        <button></button>
       </section>
     </div>
   );
